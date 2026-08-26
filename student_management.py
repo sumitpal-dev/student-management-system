@@ -1,6 +1,21 @@
 # Student Management System
 
-students = {}
+import json
+
+FILE_NAME = "students.json"
+
+
+def load_students():
+    try:
+        with open(FILE_NAME, "r") as file:
+            return json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
+def save_students():
+    with open(FILE_NAME, "w") as file:
+        json.dump(students, file, indent=4)
 
 
 def add_student():
@@ -13,6 +28,7 @@ def add_student():
         "course": course
     }
 
+    save_students()
     print("Student added successfully!")
 
 
@@ -47,9 +63,13 @@ def delete_student():
 
     if roll_no in students:
         del students[roll_no]
+        save_students()
         print("Student deleted successfully!")
     else:
         print("Student not found.")
+
+
+students = load_students()
 
 
 while True:
