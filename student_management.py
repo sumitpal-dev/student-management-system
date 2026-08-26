@@ -58,6 +58,26 @@ def search_student():
         print("Student not found.")
 
 
+def update_student():
+    roll_no = input("Enter Roll Number to update: ")
+
+    if roll_no in students:
+        print("\nCurrent Details:")
+        print("Name:", students[roll_no]["name"])
+        print("Course:", students[roll_no]["course"])
+
+        name = input("Enter New Name: ")
+        course = input("Enter New Course: ")
+
+        students[roll_no]["name"] = name
+        students[roll_no]["course"] = course
+
+        save_students()
+        print("Student updated successfully!")
+    else:
+        print("Student not found.")
+
+
 def delete_student():
     roll_no = input("Enter Roll Number to delete: ")
 
@@ -77,8 +97,9 @@ while True:
     print("1. Add Student")
     print("2. View Students")
     print("3. Search Student")
-    print("4. Delete Student")
-    print("5. Exit")
+    print("4. Update Student")
+    print("5. Delete Student")
+    print("6. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -89,8 +110,10 @@ while True:
     elif choice == "3":
         search_student()
     elif choice == "4":
-        delete_student()
+        update_student()
     elif choice == "5":
+        delete_student()
+    elif choice == "6":
         print("Thank you for using Student Management System!")
         break
     else:
